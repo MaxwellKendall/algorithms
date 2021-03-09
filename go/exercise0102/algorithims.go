@@ -11,28 +11,19 @@
 
 package exercise0102
 
-func buildDynamicMap(str string) map[string]int {
-	rtrn := map[string]int{}
-	for _, v := range str {
-		rtrn[string(v)]++
-	}
-	return rtrn
-}
-
 // WithMap complexity estimates:
 // Time: O(n)
-// Space: O(1)
-// we are already at 0(1) because of the finite nature of the alphabet.
+// Space: O(1) we are at 0(1) because of the finite nature of the alphabet.
 func WithMap(s1 string, s2 string) bool {
-	if len(s1) != len(s2) {
+	if (len(s1) != len(s2)) {
 		return false
 	}
-	myMap := map[string]int{}
+	myMap := map[rune]int{}
 	for _, v := range s1 {
-		myMap[string(v)]++
+		myMap[v]++
 	}
 	for _, v := range s2 {
-		myMap[string(v)]--
+		myMap[v]--
 	}
 	for _, v := range myMap {
 		if v != 0 {
@@ -42,3 +33,29 @@ func WithMap(s1 string, s2 string) bool {
 	return true
 }
 
+func buildDynamicMap(str string) map[rune]int {
+	rtrn := map[rune]int{}
+	for _, v := range str {
+		rtrn[v]++
+	}
+	return rtrn
+}
+
+// With2Maps complexity estimates:
+// Time: O(n)
+// Space: O(1) we are at 0(1) because of the finite nature of the alphabet.
+func With2Maps(s1 string, s2 string) bool {
+	if len(s1) != len(s2) {
+		return false
+	}
+
+	firstMap := buildDynamicMap(s1)
+	secondMap := buildDynamicMap(s2)
+
+	for key, v := range firstMap {
+		if secondMap[key] != v {
+			return false
+		}
+	}
+	return true
+}

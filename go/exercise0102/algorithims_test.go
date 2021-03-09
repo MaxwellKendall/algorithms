@@ -35,10 +35,10 @@ func TestAll(t *testing.T) {
 			want: false,
 		},
 		{
-			name: "empty string returns false",
+			name: "empty string returns true",
 			s1: "",
 			s2: "",
-			want: false,
+			want: true,
 		},
 		{
 			name: "double a (w/ no t) in alphabet returns false",
@@ -53,12 +53,6 @@ func TestAll(t *testing.T) {
 			want: false,
 		},
 		{
-			name: "empty string test",
-			s1: "",
-			s2: "",
-			want: false
-		},
-		{
 			name: "string w/ 4 bs and 2 as vs 2bs and 4as",
 			s1: "aabbaa",
 			s2: "aabbbb",
@@ -67,6 +61,7 @@ func TestAll(t *testing.T) {
 	} {
 		for _, a := range []func(string, string) bool{
 			WithMap,
+			With2Maps,
 		} {
 			t.Run(fmt.Sprintf("%v %v", testutils.FuncName(a), tt.name), func(t *testing.T) {
 				got := a(tt.s1, tt.s2)
