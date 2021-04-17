@@ -58,6 +58,12 @@ func TestAll(t *testing.T) {
 			s2: "aabbbb",
 			want: false,
 		},
+		{
+			name: "empty string test",
+			s1: "",
+			s2: "",
+			want: false,
+		},
 	} {
 		for _, a := range []func(string, string) bool{
 			WithMap,
